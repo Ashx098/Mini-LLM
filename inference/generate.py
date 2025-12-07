@@ -1,9 +1,9 @@
 import torch
 import torch.nn.functional as F
-from model.config import ModelArgs
-from model.transformer import Transformer
 from transformers import AutoTokenizer
-from inference.sampling import apply_temperature, sample_top_p
+from model.transformer import Transformer
+from model.config import ModelArgs
+from inference.sampling import sample_top_p, apply_temperature
 import os
 
 class Generator:
@@ -16,6 +16,9 @@ class Generator:
         
         # 2. Load Model Config & Weights
         print(f"Loading Checkpoint from {checkpoint_path}...")
+        
+        # Allow ModelArgs to be loaded safely
+        torch.serialization.add_safe_globals([ModelArgs])
         checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=True)
         
         # Reconstruct Args from checkpoint (ensures config matches training)
