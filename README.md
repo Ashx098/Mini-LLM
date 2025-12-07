@@ -298,6 +298,15 @@ python tests/train/test_phase3_2.py
 python tests/train/test_phase3_3_4.py
 ```
 
+### Inference
+
+```bash
+python run_inference.py --prompt "The future of AI is" --temp 0.7
+```
+```bash
+python plot_logs.py
+```
+
 ### Code Quality
 
 ```bash
