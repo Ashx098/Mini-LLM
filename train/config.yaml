@@ -4,6 +4,7 @@
 out_dir: 'out_production'
 eval_interval: 500        # Check validation every 500 steps
 log_interval: 10          # Log speed every 10 steps
+eval_iters: 200           # Number of batches to estimate loss
 always_save_checkpoint: false # Only save if val loss improves
 
 # Weights & Biases
