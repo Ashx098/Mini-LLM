@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+MiniLLM-env/
+venv/
+env/
+ENV/
+.venv
+
+# Data
+data/*
+!data/*.py
+!data/bin/
+*.txt
+*.json
+*.csv
+*.parquet
+
+# Model checkpoints and weights
+checkpoints/
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+
+# Tokenizer artifacts (keep the final trained ones, ignore intermediate)
+*.vocab
+*.model
+!Tokenizer/*/spm.model
+!Tokenizer/*/spm.vocab
+!Tokenizer/*/tokenizer.model
+
+# Logs
+logs/
+*.log
+wandb/
+tensorboard/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Temporary files
+*.tmp
+*.bak
+.cache/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Documentation builds
+docs/_build/
+site/
+
+# Large files
+*.docx
+Mini-LLM.docx
