@@ -16,7 +16,7 @@ class Generator:
         
         # 2. Load Model Config & Weights
         print(f"Loading Checkpoint from {checkpoint_path}...")
-        checkpoint = torch.load(checkpoint_path, map_location=device)
+        checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=True)
         
         # Reconstruct Args from checkpoint (ensures config matches training)
         self.args = checkpoint['model_args']

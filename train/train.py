@@ -6,6 +6,7 @@ import torch
 import numpy as np
 import yaml
 import argparse
+import datetime
 from model.config import ModelArgs
 from model.transformer import Transformer
 from train.dataloader import DataLoader
@@ -61,6 +62,10 @@ seed = config['seed']
 # -----------------------------------------------------------------------------
 # Setup
 # -----------------------------------------------------------------------------
+if wandb_log:
+    import wandb
+    wandb.init(project=wandb_project, name=wandb_run_name, config=config)
+
 torch.manual_seed(seed)
 os.makedirs(out_dir, exist_ok=True)
 ctx = torch.amp.autocast(device_type=device, dtype=getattr(torch, dtype))
@@ -115,6 +120,17 @@ def estimate_loss():
     return out
 
 # -----------------------------------------------------------------------------
+# Logging Setup
+# -----------------------------------------------------------------------------
+import json
+log_dir = 'logs'
+os.makedirs(log_dir, exist_ok=True)
+train_log_file = os.path.join(log_dir, 'train.jsonl')
+eval_log_file = os.path.join(log_dir, 'eval.jsonl')
+
+print(f"Logging to {log_dir}...")
+
+# -----------------------------------------------------------------------------
 # Training Loop
 # -----------------------------------------------------------------------------
 print("Starting training...")
@@ -135,6 +151,15 @@ while iter_num < max_iters:
     if iter_num % eval_interval == 0 and iter_num > 0:
         losses = estimate_loss()
         print(f"step {iter_num}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
+        
+        # Log Eval Stats
+        with open(eval_log_file, 'a') as f:
+            f.write(json.dumps({
+                'step': iter_num,
+                'train_loss': losses['train'].item(),
+                'val_loss': losses['val'].item(),
+                'timestamp': time.time()
+            }) + '\n')
         
         if losses['val'] < best_val_loss or always_save_checkpoint:
             best_val_loss = losses['val']
@@ -169,7 +194,35 @@ while iter_num < max_iters:
     t0 = t1
     if iter_num % log_interval == 0:
         lossf = loss.item() * gradient_accumulation_steps
-        print(f"iter {iter_num}: loss {lossf:.4f}, time {dt*1000:.2f}ms, lr {lr:.6f}")
+        
+        # Calculate ETA
+        remaining_steps = max_iters - iter_num
+        eta_seconds = remaining_steps * dt
+        eta_str = str(datetime.timedelta(seconds=int(eta_seconds)))
+        
+        print(f"iter {iter_num}: loss {lossf:.4f}, time {dt*1000:.2f}ms, lr {lr:.6f}, eta {eta_str}")
+        
+        # Log Train Stats
+        with open(train_log_file, 'a') as f:
+            f.write(json.dumps({
+                'step': iter_num,
+                'loss': lossf,
+                'lr': lr,
+                'time_ms': dt * 1000,
+                'eta_seconds': eta_seconds,
+                'eta': eta_str,
+                'timestamp': time.time()
+            }) + '\n')
+            
+        if wandb_log:
+            import wandb
+            wandb.log({
+                "iter": iter_num,
+                "train/loss": lossf,
+                "lr": lr,
+                "time_ms": dt * 1000,
+                "eta_hours": eta_seconds / 3600
+            })
         
     iter_num += 1
 
