@@ -15,6 +15,7 @@ ENV/
 # Data
 data/*
 !data/*.py
+!data/*.md
 !data/bin/
 *.txt
 *.json
@@ -35,6 +36,7 @@ checkpoints/
 !Tokenizer/*/spm.model
 !Tokenizer/*/spm.vocab
 !Tokenizer/*/tokenizer.model
+!Tokenizer/*/*.json
 
 # Logs
 logs/
