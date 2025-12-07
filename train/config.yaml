@@ -47,7 +47,7 @@ model:
 
 # System
 device: 'cuda'
-compile: true             # ESSENTIAL on A100. 30-50% speedup.
+compile: false            # Disabled to fix long startup hang
 dtype: 'bfloat16'         # A100 supports bfloat16
 
 # Data
