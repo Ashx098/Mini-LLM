@@ -1,0 +1,53 @@
+# Mini-LLM Test Configuration (for quick validation)
+
+# Output & Logging
+out_dir: 'out'
+eval_interval: 5          # Check validation every 5 steps
+log_interval: 1           # Log every step
+eval_iters: 10            # Use fewer batches for validation
+always_save_checkpoint: true
+
+# Weights & Biases (optional)
+wandb_log: false
+wandb_project: 'mini-llm'
+wandb_run_name: 'mini-gpt-80m-test'
+
+# Training Hyperparameters
+batch_size: 16            # Micro-batch size
+block_size: 128           # Smaller context for faster testing
+gradient_accumulation_steps: 4
+max_iters: 10             # Just 10 steps for testing
+lr_decay_iters: 10
+
+# Learning Rate
+learning_rate: 6.0e-4
+min_lr: 6.0e-5
+warmup_iters: 2           # Quick warmup
+
+# Optimizer
+weight_decay: 0.1
+beta1: 0.9
+beta2: 0.95
+grad_clip: 1.0
+
+# Model Architecture
+model:
+  dim: 384
+  n_layers: 16
+  n_heads: 6
+  n_kv_heads: 6
+  vocab_size: 32000
+  multiple_of: 32
+  max_seq_len: 128        # Match block_size for testing
+  dropout: 0.0
+
+# System
+device: 'cpu'             # CPU for testing
+compile: false            # Skip compilation for quick test
+dtype: 'float32'          # Use float32 for CPU
+
+# Data
+data_dir: 'data/bin'
+
+# Random Seed
+seed: 1337

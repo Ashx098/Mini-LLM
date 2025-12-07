@@ -1,0 +1,53 @@
+# Mini-LLM Training Configuration
+
+# Output & Logging
+out_dir: 'out'
+eval_interval: 200        # How often to check validation loss
+log_interval: 10          # How often to print training stats
+eval_iters: 50            # How many batches to use for validation estimate
+always_save_checkpoint: true
+
+# Weights & Biases (optional)
+wandb_log: false
+wandb_project: 'mini-llm'
+wandb_run_name: 'mini-gpt-80m'
+
+# Training Hyperparameters
+batch_size: 16            # Micro-batch size (adjust for GPU memory)
+block_size: 512           # Context length for training
+gradient_accumulation_steps: 4  # Effective batch = batch_size * this
+max_iters: 5000           # Total training steps
+lr_decay_iters: 5000      # LR decay schedule length (usually = max_iters)
+
+# Learning Rate
+learning_rate: 6.0e-4     # Peak learning rate
+min_lr: 6.0e-5            # Minimum learning rate (floor)
+warmup_iters: 200         # Warmup steps
+
+# Optimizer
+weight_decay: 0.1         # Weight decay coefficient
+beta1: 0.9                # Adam beta1
+beta2: 0.95               # Adam beta2
+grad_clip: 1.0            # Gradient clipping threshold
+
+# Model Architecture
+model:
+  dim: 384                # Hidden dimension
+  n_layers: 16            # Number of transformer blocks
+  n_heads: 6              # Number of attention heads
+  n_kv_heads: 6           # Number of KV heads (for GQA)
+  vocab_size: 32000       # Vocabulary size
+  multiple_of: 32         # MLP hidden dim multiple
+  max_seq_len: 512        # Maximum sequence length
+  dropout: 0.0            # Dropout rate (0.0 for pretraining)
+
+# System
+device: 'cuda'            # 'cuda' or 'cpu'
+compile: true             # Use torch.compile (PyTorch 2.0+)
+dtype: 'bfloat16'         # 'bfloat16', 'float16', or 'float32'
+
+# Data
+data_dir: 'data/bin'      # Path to tokenized data
+
+# Random Seed
+seed: 1337
