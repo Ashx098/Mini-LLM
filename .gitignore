@@ -18,6 +18,7 @@ data/*
 !data/*.md
 !data/bin/
 *.txt
+!requirements.txt
 *.json
 *.csv
 *.parquet

@@ -1,0 +1,30 @@
+# Core PyTorch (CUDA 12.1)
+# Install command: pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+torch>=2.0.0
+torchvision
+torchaudio
+
+# Hugging Face Ecosystem
+transformers>=4.30.0
+tokenizers>=0.13.3
+datasets>=2.12.0
+accelerate>=0.20.0
+huggingface_hub>=0.16.0
+sentencepiece>=0.1.99
+
+# Data Processing & Math
+numpy>=1.24.0
+scipy>=1.10.0
+tqdm>=4.65.0
+
+# Utilities
+pyyaml>=6.0
+einops>=0.6.1
+
+# Logging & Monitoring
+wandb>=0.15.0
+tensorboard>=2.13.0
+
+# Performance (Optional but recommended for A100)
+# Install command: pip install flash-attn --no-build-isolation
+flash-attn>=2.0.0
