@@ -18,10 +18,10 @@ max_iters: 10000          # Train for ~10k steps (approx 3.5 epochs)
 lr_decay_iters: 10000     # Decay over the full run
 
 # A100 Saturator Config
-batch_size: 64            # A100 can easily handle 64 sequences of 2048
+batch_size: 32            # Reduced from 64 to fix OOM
 block_size: 2048          # FULL Context Window
-gradient_accumulation_steps: 4 
-# Effective batch: 64 * 4 * 2048 = 524,288 tokens per update
+gradient_accumulation_steps: 8 # Increased from 4 to maintain effective batch size
+# Effective batch: 32 * 8 * 2048 = 524,288 tokens per update
 
 # Learning Rate
 learning_rate: 6.0e-4     # Standard for this scale
