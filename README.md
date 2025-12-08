@@ -6,6 +6,46 @@
 
 A production-grade implementation of a decoder-only transformer language model, built from scratch with modern best practices. This project demonstrates the complete pipeline from raw text to a functioning LLM capable of text generation.
 
+## 🚀 Training Results
+
+The model was trained on an **NVIDIA A100 (80GB)** for 10,000 steps (5 hours). Despite the small dataset and short training time, it learned grammar, syntax, and basic world knowledge remarkably well.
+
+### Training Curve
+<p align="center">
+  <img src="plots/loss_curve.png" width="600" alt="Training Loss Curve">
+</p>
+
+### Inference Examples
+
+**Prompt**: `"Hello, how are"`
+```
+Hello, how are you doing?
+```
+
+**Prompt**: `"Once upon a time, there was a"`
+```
+Once upon a time, there was a conflict of the most recently completed , it was a finalizing the most often used to the western Köcorporsen.
+```
+
+*(Note: The model is still in early training stages. Hallucinations are expected, but grammar is solid!)*
+
+# Test the model at: https://huggingface.co/Ashx098/Mini-LLM
+---
+
+## 🌟 Why Mini-LLM?
+
+This isn't just another "toy" model. **Mini-LLM is a high-fidelity implementation of state-of-the-art LLM architecture.**
+
+Unlike basic educational implementations, Mini-LLM includes production-grade features:
+*   **RoPE & SwiGLU**: The exact same components used in Llama 3.
+*   **RMSNorm**: For superior training stability.
+*   **SentencePiece BPE**: Real-world tokenization, not character-level.
+*   **Scalable**: The code is designed to scale from 80M to 80B parameters just by changing the config.
+
+It is effectively a **"little Better NanoGPT"** which is cleaner, more modern, and ready for serious research or scaling up to multi-node clusters.
+
+---
+
 ## 🎯 Project Overview
 
 **Mini-LLM** is an educational yet production-ready implementation of a large language model featuring:

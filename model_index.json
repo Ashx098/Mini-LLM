@@ -1,0 +1,9 @@
+{
+  "models": [
+    {
+      "id": "Mini-LLM",
+      "name": "Mini-LLM 80M",
+      "type": "causal-lm"
+    }
+  ]
+}

@@ -20,11 +20,14 @@ data/*
 *.txt
 !requirements.txt
 *.json
+!model_index.json
 *.csv
 *.parquet
 
 # Model checkpoints and weights
 checkpoints/
+out_production/
+out_safetensors/
 *.pt
 *.pth
 *.bin
