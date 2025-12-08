@@ -359,7 +359,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📧 Contact
 
 For questions or feedback, please open an issue on GitHub.
-MSR Avinash - ML Research Engineer
+**MSR Avinash - ML Research Engineer**
 ---
 
 **Built with ❤️ for the ML community**
