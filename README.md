@@ -60,7 +60,7 @@ It is effectively a **"little Better NanoGPT"** which is cleaner, more modern, a
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Mini-LLM Architecture                     │
+│                    Mini-LLM Architecture                    │
 ├─────────────────────────────────────────────────────────────┤
 │  • Decoder-only Transformer (GPT-style)                     │
 │  • 16 layers × 384 hidden dim × 6 attention heads           │
@@ -251,7 +251,7 @@ Prompt: "Hello world"
 Output: "Hello world c c c c c c c c c c"
 ```
 
-**After 5,000 steps:**
+**After 10,000 steps:**
 ```
 Prompt: "Once upon a time"
 Output: "Once upon a time, there was a young girl who lived in a small village..."
@@ -295,34 +295,6 @@ device: 'cuda'                    # 'cuda' or 'cpu'
 compile: true                     # Use torch.compile
 dtype: 'bfloat16'                 # 'bfloat16', 'float16', or 'float32'
 ```
-
-## 🎯 Performance Benchmarks
-
-### Training Speed (NVIDIA A100)
-
-| Batch Size | Block Size | Tokens/Sec | Time/1K Steps |
-|------------|------------|------------|---------------|
-| 16 | 512 | ~65K | ~8 min |
-| 32 | 512 | ~120K | ~4.5 min |
-| 16 | 1024 | ~35K | ~15 min |
-
-### Inference Speed
-
-| Method | Tokens/Sec | Speedup |
-|--------|------------|---------|
-| No KV Cache | 2-5 | 1x |
-| With KV Cache | 200-500 | **100x** |
-
-### Memory Usage
-
-| Component | GPU Memory |
-|-----------|------------|
-| Model (BF16) | ~200 MB |
-| Optimizer State | ~400 MB |
-| Activations (batch=16, seq=512) | ~2 GB |
-| KV Cache (seq=512) | ~13 MB |
-| **Total (Training)** | **~2.6 GB** |
-
 ## 🛠️ Development
 
 ### Running Tests
@@ -346,20 +318,7 @@ python run_inference.py --prompt "The future of AI is" --temp 0.7
 ```bash
 python plot_logs.py
 ```
-
-### Code Quality
-
-```bash
-# Format code
-black .
-
-# Lint
-flake8 .
-
-# Type checking
-mypy .
-```
-
+-----------------
 ## 📖 Learning Resources
 
 ### Papers Implemented
@@ -400,7 +359,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📧 Contact
 
 For questions or feedback, please open an issue on GitHub.
-
+MSR Avinash - ML Research Engineer
 ---
 
 **Built with ❤️ for the ML community**
