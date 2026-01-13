@@ -33,7 +33,7 @@ Once upon a time, there was a conflict of the most recently completed , it was a
 
 ## 🎮 Try It Without Installing
 
-**[Open in Google Colab](https://colab.research.google.com/github/yourusername/Mini-LLM/blob/main/demo.ipynb)** - Run the demo notebook directly in your browser!
+**[Open in Google Colab](https://colab.research.google.com/github/Ashx098/Mini-LLM/blob/main/demo.ipynb)** - Run the demo notebook directly in your browser!
 
 Or download `demo.ipynb` and run locally with Jupyter:
 ```bash
@@ -133,7 +133,7 @@ No installation required - test the trained model on HuggingFace:
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/Mini-LLM.git
+git clone https://github.com/Ashx098/Mini-LLM.git
 cd Mini-LLM
 
 # Create virtual environment
